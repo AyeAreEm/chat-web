@@ -1,9 +1,13 @@
 # chat-web
 
 ## server.js, script.js, index.ejs, rooms.ejs
+
 server.js => express server and socket.io server
+
 script.js => client side javascript to connect to websockets
+
 index.ejs => index page with javascript that loads links for chat rooms
+
 room.ejs => room page for chat rooms
 
 ## server.js
