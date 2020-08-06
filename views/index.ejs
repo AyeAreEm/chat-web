@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script defer src="http://10.0.1.14:3000/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
+    <title>Chat App</title>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #36393f;
+            font-size: 'Roboto', sans-serif;
+            text-align: center;
+            align-items: center;
+        }
+
+        button {
+            background-color: rgb(114,137,218);
+            border: none;
+            margin-bottom: 5%;
+        }
+
+        a {
+            font-size: 20px;
+            color: white;
+            text-decoration: underline;
+        }
+
+        p {
+            font-size: 25px;
+            color: rgb(199, 199, 199);
+        }
+
+        .main {
+           background: rgb(64, 74, 85);
+           margin: auto;
+           border-radius: 5px;
+           min-width: 25%;
+           margin-top: 10%;
+        }
+
+        .main input {
+            margin-bottom: 5%;
+            margin-top: 5%;
+            border-radius: 5px;
+            border: none;
+            height: 20px;
+            width: 70%;
+        }
+
+        .main input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div id="room-container">
+            <p>Rooms:</p>
+            <% Object.keys(rooms).forEach(room => { %>
+                <a href="/<%= room%>"><%= room%></a>
+            <%}) %>
+        </div>
+    
+        <form action="/room" method="POST">
+            <input type="text" name="room" required autocomplete="off" placeholder="space for private room"><br>
+            <button type="submit">New Room</button><br>
+            <button type="submit" formaction="/private-room">Private New Room</button>
+        </form>
+    </div>
+</body>
+</html>
