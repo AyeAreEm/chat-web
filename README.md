@@ -64,7 +64,7 @@ room.ejs => room page for chat rooms
 ## script.js
 ```javascript
   //connecting to express and socket server
-  const socket = io('http://10.0.1.14:3000');
+  const socket = io('http://ipaddress:3000');
   
   //handling prompts and sending request for chatting
   if (messageForm != null) {
@@ -159,6 +159,8 @@ room.ejs => room page for chat rooms
    </form>
 ```
 
+## New Features
+1. typing status
+
 ## Working on new features
-1. fix bugs with showing if the user is typing or not
-2. fix private rooms
+1. fix private rooms
