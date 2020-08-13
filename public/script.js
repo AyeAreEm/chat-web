@@ -1,4 +1,4 @@
-const socket = io('http://10.0.1.14:3000');
+const socket = io('http://ipaddress:3000');
 const messageContainer = document.getElementById('message-container');
 const roomContainer = document.getElementById('room-container');
 const messageForm = document.getElementById('send-container');
@@ -21,14 +21,19 @@ if (messageForm != null) {
     messageInput.addEventListener('keyup', function() {
         socket.emit('typing', roomName, name);
     });
+
+    messageInput.addEventListener('keyup', function(e) {
+        if (e.keyCode == 13 || e.keyCode == 8) {
+            socket.emit('stopped-typing', roomName, name);
+        }
+    });
 }
 
 socket.on('room-created', room => {
     const roomElement = document.createElement('div');
-    roomElement.innerText = room;
     const roomLink = document.createElement('a');
     roomLink.href = `/${room}`;
-    roomLink.innerText = 'join';
+    roomLink.innerText = `${room}`;
     roomContainer.append(roomElement);
     roomContainer.append(roomLink);
 });
@@ -43,11 +48,11 @@ socket.on('private-room-created', room => {
 });
 
 socket.on('received-typing', name => {
-    if (messageInput) {
-        typingStatus.innerHTML = `${name} is typing`;
-    } else if (messageInput.value == '') {
-        typingStatus.innerHTML = '';
-    }
+    typingStatus.innerText = `${name} is typing`;
+});
+
+socket.on('received-stopped-typing', name => {
+    typingStatus.innerText = ``;
 });
 
 socket.on('chat-message', data => {
