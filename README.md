@@ -1,6 +1,6 @@
 # chat-web
 
-## server.js, script.js, index.ejs, rooms.ejs
+## server.js, script.js, index.ejs, rooms.ejs, PageNotFound.ejs
 
 server.js => express server and socket.io server
 
@@ -9,6 +9,8 @@ script.js => client side javascript to connect to websockets
 index.ejs => index page with javascript that loads links for chat rooms
 
 room.ejs => room page for chat rooms
+
+PageNotFound.ejs => on 404 error, it shows this file
 
 ## server.js
 ```javascript
