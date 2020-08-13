@@ -24,6 +24,10 @@ app.post('/room', (req, res) => {
     io.emit('room-created', req.body.room);
 });
 
+app.get('/room', (req, res) => {
+    res.render('PageNotFound');
+});
+
 app.get('/:room', (req, res) => {
     if (rooms[req.params.room] == null) {
         return res.redirect('/');
@@ -39,6 +43,10 @@ app.post('/private-room', (req, res) => {
     rooms[req.body.room] = {users: {}};
     res.redirect(`/private-room/${req.body.room}`);
     io.emit('private-room-created', req.body.room);
+});
+
+app.get('/private-room', (req, res) => {
+    res.render('PageNotFound');
 });
 
 app.get('/private-room/:room', (req, res) => {
@@ -58,6 +66,9 @@ io.on('connection', socket => {
     });
     socket.on('typing', (room, name) => {
         socket.to(room).broadcast.emit('received-typing', name);
+    });
+    socket.on('stopped-typing', (room, name) => {
+        socket.to(room).broadcast.emit('received-stopped-typing', name);
     });
     socket.on('send-chat-message', (room, message) => {
         socket.to(room).broadcast.emit('chat-message', { message: message, name: rooms[room].users[socket.id] });
